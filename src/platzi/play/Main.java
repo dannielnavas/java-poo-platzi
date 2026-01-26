@@ -3,6 +3,8 @@ package platzi.play;
 import platzi.play.contenido.Pelicula;
 import platzi.play.plataforma.Usuario;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
@@ -12,13 +14,18 @@ public class Main {
         pelicula.titulo = "Inception";
         pelicula.descripcion = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.";
         pelicula.duracion = 148;
+
+        long  duracionLong = pelicula.duracion;
+
+        System.out.println("Duracion en long: " + duracionLong);
         pelicula.genero = "Science Fiction";
-        pelicula.anioEstreno = 2010;
+        pelicula.fechaEstreno = LocalDate.of(2024, 7, 16);
         pelicula.calificar(8.8);
         pelicula.disponible = true;
 
         Usuario usuario = new Usuario();
         usuario.nombre = "Danniel Navas";
+        usuario.fechaRegistro = LocalDateTime.now();
         usuario.ver(pelicula);
         System.out.println(pelicula.obtenerFichaTecnica());
 

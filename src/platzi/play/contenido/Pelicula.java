@@ -1,12 +1,14 @@
 package platzi.play.contenido;
 
+import java.time.LocalDate;
+
 public class Pelicula {
     public String titulo;
     public String descripcion;
     public int duracion; // Duracion en minutos
     public String genero;
-    public int anioEstreno;
     public double calificacion; // Calificacion de 0.0 a 10.0
+    public LocalDate fechaEstreno;
     public boolean disponible;
 
     public void reproducir() {
@@ -18,7 +20,7 @@ public class Pelicula {
                "Descripción: " + descripcion + "\n" +
                "Duración: " + duracion + " minutos\n" +
                "Género: " + genero + "\n" +
-               "Año de Estreno: " + anioEstreno + "\n" +
+               "Año de Estreno: " + fechaEstreno.getYear() + "\n" +
                "Calificación: " + calificacion + "/10\n" +
                "Disponible: " + (disponible ? "Sí" : "No");
     }
