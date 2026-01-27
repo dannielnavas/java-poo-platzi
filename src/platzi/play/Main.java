@@ -16,6 +16,10 @@ public class Main {
         pelicula.duracion = 148;
 
         long  duracionLong = pelicula.duracion;
+        int calificacion = (int) pelicula.calificacion;
+        long numeroDePremios = Long.parseLong("25");
+        int numeroDeActores = (int) Long.parseLong("2500000000000");
+        System.out.println("Numero de premios: " + numeroDePremios);
 
         System.out.println("Duracion en long: " + duracionLong);
         pelicula.genero = "Science Fiction";
