@@ -19,10 +19,16 @@ public class Main {
         int duracion = ScannerUtils.capturarEntero("Duración en minutos: ");
         double calificacion = ScannerUtils.capturarDecimal("Calificación (0.0 - 10.0): ");
 
-        Pelicula pelicula = new Pelicula(); // instaciando el objeto Pelicula
-        pelicula.titulo = nombre;
-        pelicula.descripcion = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.";
-        pelicula.duracion = duracion;
+        Pelicula pelicula = new Pelicula(
+                nombre,
+                "",
+                duracion,
+                generoDeContenido,
+                LocalDate.now()
+        ); // instaciando el objeto Pelicula
+//        pelicula.titulo = nombre;
+//        pelicula.descripcion = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.";
+//        pelicula.duracion = duracion;
 
 //        long  duracionLong = pelicula.duracion;
 //        int calificacion = (int) pelicula.calificacion;
@@ -31,14 +37,12 @@ public class Main {
 //        System.out.println("Numero de premios: " + numeroDePremios);
 
 //        System.out.println("Duracion en long: " + duracionLong);
-        pelicula.genero = generoDeContenido;
-        pelicula.fechaEstreno = LocalDate.of(2024, 7, 16);
-        pelicula.calificar(calificacion);
-        pelicula.disponible = true;
+//        pelicula.genero = generoDeContenido;
+//        pelicula.fechaEstreno = LocalDate.of(2024, 7, 16);
+//        pelicula.calificar(calificacion);
+//        pelicula.disponible = true;
 
-        Usuario usuario = new Usuario();
-        usuario.nombre = "Danniel Navas";
-        usuario.fechaRegistro = LocalDateTime.now();
+        Usuario usuario = new Usuario("Danniel Navas", "dannielnavas@gmail.com");
         usuario.ver(pelicula);
         System.out.println(pelicula.obtenerFichaTecnica());
     }

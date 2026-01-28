@@ -12,6 +12,12 @@ public class Usuario {
     public boolean suscripcionActiva;
     public LocalDateTime fechaRegistro;
 
+    public Usuario(String nombre, String email) {
+        this.nombre = nombre;
+        this.email = email;
+        this.fechaRegistro = LocalDateTime.now();
+    }
+
     public void ver(Pelicula pelicula){
         System.out.println("El usuario " + nombre + " está viendo la película: " );
         pelicula.reproducir();
