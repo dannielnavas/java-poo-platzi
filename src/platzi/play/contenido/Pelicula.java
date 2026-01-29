@@ -3,13 +3,13 @@ package platzi.play.contenido;
 import java.time.LocalDate;
 
 public class Pelicula {
-    public String titulo;
-    public String descripcion;
-    public int duracion; // Duracion en minutos
-    public String genero;
-    public double calificacion; // Calificacion de 0.0 a 10.0
-    public LocalDate fechaEstreno;
-    public boolean disponible;
+    private String titulo;
+    private String descripcion;
+    private int duracion; // Duracion en minutos
+    private String genero;
+    private double calificacion; // Calificacion de 0.0 a 10.0
+    private LocalDate fechaEstreno;
+    private boolean disponible;
 
     public Pelicula(String titulo, String descripcion, int duracion, String genero, LocalDate fechaEstreno) {
         this.titulo = titulo;
@@ -51,5 +51,53 @@ public class Pelicula {
 
     public boolean esPopular() {
         return calificacion >= 7.0;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public double getCalificacion() {
+        return calificacion;
+    }
+
+    public LocalDate getFechaEstreno() {
+        return fechaEstreno;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public void setFechaEstreno(LocalDate fechaEstreno) {
+        this.fechaEstreno = fechaEstreno;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 }
