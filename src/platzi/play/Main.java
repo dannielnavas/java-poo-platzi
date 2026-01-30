@@ -1,12 +1,11 @@
 package platzi.play;
 
 import platzi.play.contenido.Pelicula;
+import platzi.play.plataforma.Plataforma;
 import platzi.play.plataforma.Usuario;
 import platzi.play.util.ScannerUtils;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Scanner;
 
 public class Main {
     public static final String VERSION = "1.0.0";
@@ -45,5 +44,13 @@ public class Main {
         Usuario usuario = new Usuario("Danniel Navas", "dannielnavas@gmail.com");
         usuario.ver(pelicula);
         System.out.println(pelicula.obtenerFichaTecnica());
+
+        // plataforma
+
+        Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
+                plataforma.agreagar(pelicula);
+
+       plataforma.mostrarTitulos();
+       plataforma.eliminar(pelicula);
     }
 }
