@@ -35,4 +35,13 @@ public class Plataforma {
     public void eliminar(Pelicula pelicula) {
         this.contenio.remove(pelicula);
     }
+
+    public Pelicula buscarPorTitulo(String titulo) {
+        for (Pelicula pelicula : contenio) {
+            if (pelicula.getTitulo().equalsIgnoreCase(titulo)) {
+                return pelicula;
+            }
+        }
+        return null;
+    }
 }

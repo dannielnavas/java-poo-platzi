@@ -20,18 +20,18 @@ public class Main {
     public static void main(String[] args) {
         System.out.println(NOMBRE_PLATAFORMA + " v" + VERSION);
 
-        String nombre = ScannerUtils.capturarTexto("Nombre del contenido: ");
-        String generoDeContenido = ScannerUtils.capturarTexto("Género del contenido: ");
-        int duracion = ScannerUtils.capturarEntero("Duración en minutos: ");
-        double calificacion = ScannerUtils.capturarDecimal("Calificación (0.0 - 10.0): ");
+//        String nombre = ScannerUtils.capturarTexto("Nombre del contenido: ");
+//        String generoDeContenido = ScannerUtils.capturarTexto("Género del contenido: ");
+//        int duracion = ScannerUtils.capturarEntero("Duración en minutos: ");
+//        double calificacion = ScannerUtils.capturarDecimal("Calificación (0.0 - 10.0): ");
 
-        Pelicula pelicula = new Pelicula(
-                nombre,
-                "",
-                duracion,
-                generoDeContenido,
-                LocalDate.now()
-        ); // instaciando el objeto Pelicula
+//        Pelicula pelicula = new Pelicula(
+//                nombre,
+//                "",
+//                duracion,
+//                generoDeContenido,
+//                LocalDate.now()
+//        ); // instaciando el objeto Pelicula
 //        pelicula.titulo = nombre;
 //        pelicula.descripcion = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.";
 //        pelicula.duracion = duracion;
@@ -54,13 +54,15 @@ public class Main {
 //
 //        // plataforma
 //
-        Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
+
 //                plataforma.agreagar(pelicula);
 //
 //       plataforma.mostrarTitulos();
 //       plataforma.eliminar(pelicula);
 //
 
+        Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
+        cargarPeliculas(plataforma);
 
        while(true) {
            int opcionElegida = ScannerUtils.capturarEntero(
@@ -90,41 +92,129 @@ public class Main {
                    plataforma.agreagar(nuevaPelicula);
                }
                case MOSTRAR_TITULO -> {
-                     plataforma.mostrarTitulos();
+                     String nombreBuscado = ScannerUtils.capturarTexto("Ingrese el título de la película a buscar: ");
+                     Pelicula peliculaEncontrada = plataforma.buscarPorTitulo(nombreBuscado);
+                     if(peliculaEncontrada != null) {
+                             System.out.println("Película encontrada:");
+                             System.out.println(peliculaEncontrada.obtenerFichaTecnica());
+                      } else {
+                             System.out.println("La película con título '" + nombreBuscado + "' no fue encontrada.");
+                     }
                }
                case MOSTRAR -> {
-                   // falta
+                     plataforma.mostrarTitulos();
                }
                case ELIMINAR -> {
-                   // falta
+                    String nombreAEliminar = ScannerUtils.capturarTexto("Ingrese el título de la película a eliminar: ");
+                    Pelicula peliculaAEliminar = plataforma.buscarPorTitulo(nombreAEliminar);
+                    if(peliculaAEliminar != null) {
+                         plataforma.eliminar(peliculaAEliminar);
+                         System.out.println("La película '" + nombreAEliminar + "' ha sido eliminada.");
+                    } else {
+                         System.out.println("La película con título '" + nombreAEliminar + "' no fue encontrada.");
+                    }
                }
                 case SALIR -> System.exit(0);
 
            }
 
-           if(opcionElegida == AGREGAR) {
-               String titulo = ScannerUtils.capturarTexto("Título de la película: ");
-               String genero = ScannerUtils.capturarTexto("Género de la película: ");
-               int duracionMinutos = ScannerUtils.capturarEntero("Duración en minutos: ");
-
-               Pelicula nuevaPelicula = new Pelicula(
-                       titulo,
-                       "",
-                       duracionMinutos,
-                       genero,
-                       LocalDate.now()
-               );
-               plataforma.agreagar(nuevaPelicula);
-           } else  if(opcionElegida == MOSTRAR) {
-               plataforma.mostrarTitulos();
-           } else if(opcionElegida == MOSTRAR_TITULO) {
-               // falta
-           } else if(opcionElegida == ELIMINAR) {
-               // falta
-           }
-           else  if(opcionElegida == SALIR) {
-               System.exit(0);
-           }
+//           if(opcionElegida == AGREGAR) {
+//               String titulo = ScannerUtils.capturarTexto("Título de la película: ");
+//               String genero = ScannerUtils.capturarTexto("Género de la película: ");
+//               int duracionMinutos = ScannerUtils.capturarEntero("Duración en minutos: ");
+//
+//               Pelicula nuevaPelicula = new Pelicula(
+//                       titulo,
+//                       "",
+//                       duracionMinutos,
+//                       genero,
+//                       LocalDate.now()
+//               );
+//               plataforma.agreagar(nuevaPelicula);
+//           } else  if(opcionElegida == MOSTRAR) {
+//               plataforma.mostrarTitulos();
+//           } else if(opcionElegida == MOSTRAR_TITULO) {
+//               String nombreBuscado = ScannerUtils.capturarTexto("Ingrese el título de la película a buscar: ");
+//               Pelicula peliculaEncontrada = plataforma.buscarPorTitulo(nombreBuscado);
+//               if(peliculaEncontrada != null) {
+//                     System.out.println("Película encontrada:");
+//                     System.out.println(peliculaEncontrada.obtenerFichaTecnica());
+//                } else {
+//                     System.out.println("La película con título '" + nombreBuscado + "' no fue encontrada.");
+//               }
+//           } else if(opcionElegida == ELIMINAR) {
+//                String nombreAEliminar = ScannerUtils.capturarTexto("Ingrese el título de la película a eliminar: ");
+//                Pelicula peliculaAEliminar = plataforma.buscarPorTitulo(nombreAEliminar);
+//                if(peliculaAEliminar != null) {
+//                     plataforma.eliminar(peliculaAEliminar);
+//                     System.out.println("La película '" + nombreAEliminar + "' ha sido eliminada.");
+//                } else {
+//                     System.out.println("La película con título '" + nombreAEliminar + "' no fue encontrada.");
+//                }
+//           }
+//           else  if(opcionElegida == SALIR) {
+//               System.exit(0);
+//           }
        }
     }
+
+       private static  void cargarPeliculas(Plataforma plataforma) {
+           plataforma.agreagar(
+                     new Pelicula(
+                            "Inception",
+                            "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+                            148,
+                            "Sci-Fi",
+                            8.8,
+                            LocalDate.of(2010, 7, 16),
+                            true
+                     )
+           );
+              plataforma.agreagar(
+                        new Pelicula(
+                             "The Dark Knight",
+                             "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+                             152,
+                             "Action",
+                             9.0,
+                             LocalDate.of(2008, 7, 18),
+                             true
+                        )
+              );
+                plataforma.agreagar(
+                            new Pelicula(
+                                 "Interstellar",
+                                 "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+                                 169,
+                                 "Sci-Fi",
+                                 8.6,
+                                 LocalDate.of(2014, 11, 7),
+                                 true
+                            )
+                );
+                plataforma.agreagar(
+                        new Pelicula(
+                             "The Matrix",
+                             "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+                             136,
+                             "Sci-Fi",
+                             8.7,
+                             LocalDate.of(1999, 3, 31),
+                             true
+                        )
+                );
+                plataforma.agreagar(
+                        new Pelicula(
+                             "Forrest Gump",
+                             "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75.",
+                             142,
+                             "Drama",
+                             8.8,
+                             LocalDate.of(1994, 7, 6),
+                             true
+                        )
+                );
+        }
+
+
 }
