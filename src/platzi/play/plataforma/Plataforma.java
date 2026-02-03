@@ -7,15 +7,15 @@ import java.util.List;
 
 public class Plataforma {
     private String nombre;
-    private List<Pelicula> contenio;
+    private List<Pelicula> contenido;
 
     public Plataforma(String nombre) {
         this.nombre = nombre;
-        this.contenio = new ArrayList<>();
+        this.contenido = new ArrayList<>();
     }
 
     public void agreagar(Pelicula pelicula) {
-        this.contenio.add(pelicula);
+        this.contenido.add(pelicula);
     }
 
     public String getNombre() {
@@ -23,25 +23,32 @@ public class Plataforma {
     }
 
     public List<Pelicula> getContenio() {
-        return contenio;
+        return contenido;
     }
 
     public void mostrarTitulos() {
-        for (Pelicula pelicula : contenio) {
-            System.out.println(pelicula.getTitulo());
-        }
+//        for (Pelicula pelicula : contenio) {
+//            System.out.println(pelicula.getTitulo());
+//        }
+        contenido.forEach(pelicula -> System.out.println(pelicula.getTitulo()));
+
     }
 
     public void eliminar(Pelicula pelicula) {
-        this.contenio.remove(pelicula);
+        this.contenido.remove(pelicula);
     }
 
     public Pelicula buscarPorTitulo(String titulo) {
-        for (Pelicula pelicula : contenio) {
-            if (pelicula.getTitulo().equalsIgnoreCase(titulo)) {
-                return pelicula;
-            }
-        }
-        return null;
+//        for (Pelicula pelicula : contenio) {
+//            if (pelicula.getTitulo().equalsIgnoreCase(titulo)) {
+//                return pelicula;
+//            }
+//        }
+//        return null;
+      return  this.contenido.stream().filter(pelicula -> pelicula.getTitulo().equalsIgnoreCase(titulo)).findFirst().orElse(null);
     }
+
+    public List<Pelicula> buscarPorGenero(String genero) {
+        return contenido.stream().filter(pelicula -> pelicula.getGenero().equalsIgnoreCase(genero)).toList();
+            }
 }

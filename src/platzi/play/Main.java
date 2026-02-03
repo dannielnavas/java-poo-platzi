@@ -6,15 +6,17 @@ import platzi.play.plataforma.Usuario;
 import platzi.play.util.ScannerUtils;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static final String VERSION = "1.0.0";
     public static  final String NOMBRE_PLATAFORMA = "Platzi Play";
-    public  static  final int SALIR = 5;
+    public  static  final int SALIR = 6;
     public  static  final int AGREGAR = 1;
     public  static  final int MOSTRAR = 2;
     public  static  final int MOSTRAR_TITULO = 3;
     public  static  final int ELIMINAR = 4;
+    public static final int BUSCAR_POR_GENERO = 5;
 
 
     public static void main(String[] args) {
@@ -71,7 +73,8 @@ public class Main {
                            "2. Mostrar todo\n" +
                            "3. Mostrar títulos\n" +
                            "4. Eliminar película\n" +
-                           "5. Salir\n" +
+                           "5. Buscar por genero\n" +
+                           "6. Salir\n" +
                            "Opción: "
            );
            System.out.println("Opcion elegida: " + opcionElegida);
@@ -114,6 +117,13 @@ public class Main {
                          System.out.println("La película con título '" + nombreAEliminar + "' no fue encontrada.");
                     }
                }
+               case BUSCAR_POR_GENERO -> {
+                   String generoBuscado = ScannerUtils.capturarTexto("Ingrese el género de las películas a buscar: ");
+                   List<Pelicula> contenidoPorGenero = plataforma.buscarPorGenero(generoBuscado);
+                   System.out.println(contenidoPorGenero.size() + " películas encontradas del género '" + generoBuscado + "':");
+                   contenidoPorGenero.forEach(pelicula -> System.out.println("- " + pelicula.getTitulo()));
+
+                   }
                 case SALIR -> System.exit(0);
 
            }
