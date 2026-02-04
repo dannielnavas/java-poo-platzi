@@ -17,6 +17,7 @@ public class Main {
     public  static  final int MOSTRAR_TITULO = 3;
     public  static  final int ELIMINAR = 4;
     public static final int BUSCAR_POR_GENERO = 5;
+    public static final int VER_POPULARES = 7;
 
 
     public static void main(String[] args) {
@@ -66,6 +67,8 @@ public class Main {
         Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
         cargarPeliculas(plataforma);
 
+        System.out.println("Bienvenido a " + plataforma.getNombre() + "! Tenemos " + plataforma.getContenio().size() + " películas disponibles, Y mas de " + plataforma.getDuracionTotal() + " minutos de entretenimiento para ti.");
+
        while(true) {
            int opcionElegida = ScannerUtils.capturarEntero(
                    "Seleccione una opción:\n" +
@@ -75,6 +78,7 @@ public class Main {
                            "4. Eliminar película\n" +
                            "5. Buscar por genero\n" +
                            "6. Salir\n" +
+                           "7. Ver populares\n" +
                            "Opción: "
            );
            System.out.println("Opcion elegida: " + opcionElegida);
@@ -105,7 +109,8 @@ public class Main {
                      }
                }
                case MOSTRAR -> {
-                     plataforma.mostrarTitulos();
+                   List<String> titulos = plataforma.getTitulos();
+                   titulos.forEach(System.out::println);
                }
                case ELIMINAR -> {
                     String nombreAEliminar = ScannerUtils.capturarTexto("Ingrese el título de la película a eliminar: ");
@@ -126,6 +131,11 @@ public class Main {
                    }
                 case SALIR -> System.exit(0);
 
+               case VER_POPULARES -> {
+                   List<Pelicula> peliculasPopulares = plataforma.getPopulares();
+                   peliculasPopulares.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica()));
+
+               }
            }
 
 //           if(opcionElegida == AGREGAR) {
