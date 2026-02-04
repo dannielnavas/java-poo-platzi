@@ -132,7 +132,7 @@ public class Main {
                 case SALIR -> System.exit(0);
 
                case VER_POPULARES -> {
-                   List<Pelicula> peliculasPopulares = plataforma.getPopulares();
+                   List<Pelicula> peliculasPopulares = plataforma.getPopulares(2);
                    peliculasPopulares.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica()));
 
                }
