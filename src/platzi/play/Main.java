@@ -1,6 +1,8 @@
 package platzi.play;
 
+import platzi.play.contenido.Genero;
 import platzi.play.contenido.Pelicula;
+import platzi.play.excepcion.PeliculaExistenteExcetion;
 import platzi.play.plataforma.Plataforma;
 import platzi.play.plataforma.Usuario;
 import platzi.play.util.ScannerUtils;
@@ -86,7 +88,7 @@ public class Main {
            switch (opcionElegida) {
                case AGREGAR -> {
                    String titulo = ScannerUtils.capturarTexto("Título de la película: ");
-                   String genero = ScannerUtils.capturarTexto("Género de la película: ");
+                   Genero genero = ScannerUtils.capturarGenero("Genero");
                    int duracionMinutos = ScannerUtils.capturarEntero("Duración en minutos: ");
 
                    Pelicula nuevaPelicula = new Pelicula(
@@ -96,7 +98,12 @@ public class Main {
                            genero,
                            LocalDate.now()
                    );
-                   plataforma.agreagar(nuevaPelicula);
+                   try {
+                       plataforma.agreagar(nuevaPelicula);
+                   } catch (PeliculaExistenteExcetion e) {
+                       System.out.println("Error al agregar la película: " + e.getMessage());
+                   }
+
                }
                case MOSTRAR_TITULO -> {
                      String nombreBuscado = ScannerUtils.capturarTexto("Ingrese el título de la película a buscar: ");
@@ -123,7 +130,7 @@ public class Main {
                     }
                }
                case BUSCAR_POR_GENERO -> {
-                   String generoBuscado = ScannerUtils.capturarTexto("Ingrese el género de las películas a buscar: ");
+                   Genero generoBuscado = ScannerUtils.capturarGenero("Ingrese el género a buscar");
                    List<Pelicula> contenidoPorGenero = plataforma.buscarPorGenero(generoBuscado);
                    System.out.println(contenidoPorGenero.size() + " películas encontradas del género '" + generoBuscado + "':");
                    contenidoPorGenero.forEach(pelicula -> System.out.println("- " + pelicula.getTitulo()));
@@ -184,7 +191,7 @@ public class Main {
                             "Inception",
                             "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
                             148,
-                            "Sci-Fi",
+                             Genero.CIENCIA_FICCION,
                             8.8,
                             LocalDate.of(2010, 7, 16),
                             true
@@ -195,7 +202,7 @@ public class Main {
                              "The Dark Knight",
                              "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
                              152,
-                             "Action",
+                                Genero.ACCION,
                              9.0,
                              LocalDate.of(2008, 7, 18),
                              true
@@ -206,7 +213,7 @@ public class Main {
                                  "Interstellar",
                                  "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
                                  169,
-                                 "Sci-Fi",
+                                    Genero.CIENCIA_FICCION,
                                  8.6,
                                  LocalDate.of(2014, 11, 7),
                                  true
@@ -217,7 +224,7 @@ public class Main {
                              "The Matrix",
                              "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
                              136,
-                             "Sci-Fi",
+                                Genero.CIENCIA_FICCION,
                              8.7,
                              LocalDate.of(1999, 3, 31),
                              true
@@ -228,7 +235,7 @@ public class Main {
                              "Forrest Gump",
                              "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75.",
                              142,
-                             "Drama",
+                                Genero.DRAMA,
                              8.8,
                              LocalDate.of(1994, 7, 6),
                              true

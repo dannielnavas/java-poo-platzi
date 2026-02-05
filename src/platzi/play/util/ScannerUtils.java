@@ -1,5 +1,8 @@
 package platzi.play.util;
 
+import platzi.play.contenido.Genero;
+
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ScannerUtils {
@@ -31,5 +34,16 @@ public class ScannerUtils {
         double dato = SCANNER.nextDouble();
         SCANNER.nextLine();
         return (int) dato;
+    }
+
+    public static  Genero capturarGenero(String mensaje) {
+        while(true) {
+            String input = capturarTexto(mensaje);
+            try {
+                return Genero.valueOf(input.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Género inválido. Por favor ingrese un género válido.");
+            }
+        }
     }
 }

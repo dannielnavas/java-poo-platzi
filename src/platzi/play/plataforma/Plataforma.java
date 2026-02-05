@@ -1,6 +1,8 @@
 package platzi.play.plataforma;
 
+import platzi.play.contenido.Genero;
 import platzi.play.contenido.Pelicula;
+import platzi.play.excepcion.PeliculaExistenteExcetion;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,6 +18,10 @@ public class Plataforma {
     }
 
     public void agreagar(Pelicula pelicula) {
+        Pelicula contenido = this.buscarPorTitulo(pelicula.getTitulo());
+        if(contenido != null){
+            throw new PeliculaExistenteExcetion(contenido.getTitulo());
+        }
         this.contenido.add(pelicula);
     }
 
@@ -50,8 +56,8 @@ public class Plataforma {
       return  this.contenido.stream().filter(pelicula -> pelicula.getTitulo().equalsIgnoreCase(titulo)).findFirst().orElse(null);
     }
 
-    public List<Pelicula> buscarPorGenero(String genero) {
-        return contenido.stream().filter(pelicula -> pelicula.getGenero().equalsIgnoreCase(genero)).toList();
+    public List<Pelicula> buscarPorGenero(Genero genero) {
+        return contenido.stream().filter(pelicula -> pelicula.getGenero().equals(genero)).toList();
             }
     public int getDuracionTotal() {
         return contenido.stream().mapToInt(Pelicula::getDuracion).sum();
