@@ -2,6 +2,7 @@ package platzi.play;
 
 import platzi.play.contenido.Genero;
 import platzi.play.contenido.Pelicula;
+import platzi.play.contenido.ResumenCotenido;
 import platzi.play.excepcion.PeliculaExistenteExcetion;
 import platzi.play.plataforma.Plataforma;
 import platzi.play.plataforma.Usuario;
@@ -116,8 +117,10 @@ public class Main {
                      }
                }
                case MOSTRAR -> {
-                   List<String> titulos = plataforma.getTitulos();
-                   titulos.forEach(System.out::println);
+//                   List<String> titulos = plataforma.getTitulos();
+//                   titulos.forEach(System.out::println);
+                   List<ResumenCotenido> contenidosResumidos = plataforma.getResumenes();
+                   contenidosResumidos.forEach(resumen -> System.out.println("- " + resumen.toString()));
                }
                case ELIMINAR -> {
                     String nombreAEliminar = ScannerUtils.capturarTexto("Ingrese el título de la película a eliminar: ");

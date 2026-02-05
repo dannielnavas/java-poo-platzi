@@ -2,6 +2,7 @@ package platzi.play.plataforma;
 
 import platzi.play.contenido.Genero;
 import platzi.play.contenido.Pelicula;
+import platzi.play.contenido.ResumenCotenido;
 import platzi.play.excepcion.PeliculaExistenteExcetion;
 
 import java.util.ArrayList;
@@ -66,5 +67,9 @@ public class Plataforma {
     public List<Pelicula> getPopulares(int cantidad) {
 
         return contenido.stream().sorted(Comparator.comparingDouble(Pelicula::getCalificacion).reversed()).limit(cantidad).toList();
+    }
+
+    public List<ResumenCotenido> getResumenes() {
+        return contenido.stream().map(contenido -> new ResumenCotenido(contenido.getTitulo(), contenido.getDuracion(), contenido.getGenero())).toList();
     }
 }
