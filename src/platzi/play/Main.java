@@ -21,6 +21,7 @@ public class Main {
     public  static  final int ELIMINAR = 4;
     public static final int BUSCAR_POR_GENERO = 5;
     public static final int VER_POPULARES = 7;
+    public static final int REPRODUCIR = 8;
 
 
     public static void main(String[] args) {
@@ -145,6 +146,17 @@ public class Main {
                    List<Pelicula> peliculasPopulares = plataforma.getPopulares(2);
                    peliculasPopulares.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica()));
 
+               }
+
+               case REPRODUCIR -> {
+                   String nombre = ScannerUtils.capturarTexto("Ingrese el título de la película a reproducir: ");
+                   Pelicula peliculaAReproducir = plataforma.buscarPorTitulo(nombre);
+                   if(peliculaAReproducir != null) {
+                       plataforma.reproducir(peliculaAReproducir);
+                       System.out.println("Reproduciendo la película '" + peliculaAReproducir.getTitulo() + "'. Disfrútala!");
+                   } else {
+                       System.out.println("La película con título '" + nombre + "' no fue encontrada.");
+                   }
                }
            }
 
