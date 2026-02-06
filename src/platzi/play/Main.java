@@ -6,8 +6,12 @@ import platzi.play.contenido.ResumenCotenido;
 import platzi.play.excepcion.PeliculaExistenteExcetion;
 import platzi.play.plataforma.Plataforma;
 import platzi.play.plataforma.Usuario;
+import platzi.play.util.FileUtils;
 import platzi.play.util.ScannerUtils;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -201,62 +205,7 @@ public class Main {
     }
 
        private static  void cargarPeliculas(Plataforma plataforma) {
-           plataforma.agreagar(
-                     new Pelicula(
-                            "Inception",
-                            "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
-                            148,
-                             Genero.CIENCIA_FICCION,
-                            8.8,
-                            LocalDate.of(2010, 7, 16),
-                            true
-                     )
-           );
-              plataforma.agreagar(
-                        new Pelicula(
-                             "The Dark Knight",
-                             "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
-                             152,
-                                Genero.ACCION,
-                             9.0,
-                             LocalDate.of(2008, 7, 18),
-                             true
-                        )
-              );
-                plataforma.agreagar(
-                            new Pelicula(
-                                 "Interstellar",
-                                 "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
-                                 169,
-                                    Genero.CIENCIA_FICCION,
-                                 8.6,
-                                 LocalDate.of(2014, 11, 7),
-                                 true
-                            )
-                );
-                plataforma.agreagar(
-                        new Pelicula(
-                             "The Matrix",
-                             "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
-                             136,
-                                Genero.CIENCIA_FICCION,
-                             8.7,
-                             LocalDate.of(1999, 3, 31),
-                             true
-                        )
-                );
-                plataforma.agreagar(
-                        new Pelicula(
-                             "Forrest Gump",
-                             "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75.",
-                             142,
-                                Genero.DRAMA,
-                             8.8,
-                             LocalDate.of(1994, 7, 6),
-                             true
-                        )
-                );
-        }
+           plataforma.getContenio().addAll(FileUtils.leerContenido());
 
-
+       }
 }

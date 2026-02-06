@@ -9,5 +9,6 @@ public enum Genero {
     FANTASIA,
     AVENTURA,
     ANIMACION,
-    DOCUMENTAL
+    DOCUMENTAL,
+    ANIMADA
 }
