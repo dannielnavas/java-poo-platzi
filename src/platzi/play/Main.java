@@ -1,17 +1,11 @@
 package platzi.play;
 
-import platzi.play.contenido.Genero;
-import platzi.play.contenido.Pelicula;
-import platzi.play.contenido.ResumenCotenido;
+import platzi.play.contenido.*;
 import platzi.play.excepcion.PeliculaExistenteExcetion;
 import platzi.play.plataforma.Plataforma;
-import platzi.play.plataforma.Usuario;
 import platzi.play.util.FileUtils;
 import platzi.play.util.ScannerUtils;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -36,13 +30,13 @@ public class Main {
 //        int duracion = ScannerUtils.capturarEntero("Duración en minutos: ");
 //        double calificacion = ScannerUtils.capturarDecimal("Calificación (0.0 - 10.0): ");
 
-//        Pelicula pelicula = new Pelicula(
+//        Contenido pelicula = new Contenido(
 //                nombre,
 //                "",
 //                duracion,
 //                generoDeContenido,
 //                LocalDate.now()
-//        ); // instaciando el objeto Pelicula
+//        ); // instaciando el objeto Contenido
 //        pelicula.titulo = nombre;
 //        pelicula.descripcion = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.";
 //        pelicula.duracion = duracion;
@@ -93,19 +87,37 @@ public class Main {
 
            switch (opcionElegida) {
                case AGREGAR -> {
+                   int tipoContenido = ScannerUtils.capturarEntero("Tipo de contenido:\n1. Película\n2. Documental\nOpción: ");
                    String titulo = ScannerUtils.capturarTexto("Título de la película: ");
                    Genero genero = ScannerUtils.capturarGenero("Genero");
                    int duracionMinutos = ScannerUtils.capturarEntero("Duración en minutos: ");
 
-                   Pelicula nuevaPelicula = new Pelicula(
-                           titulo,
-                           "",
-                           duracionMinutos,
-                           genero,
-                           LocalDate.now()
-                   );
+
                    try {
-                       plataforma.agreagar(nuevaPelicula);
+                       if(tipoContenido == 1) {
+                           plataforma.agreagar(new Pelicula(
+                                   titulo,
+                                   "",
+                                   duracionMinutos,
+                                   genero,
+                                   9.0,
+                                   LocalDate.now(),
+                                      true
+                           ));
+                       } else  {
+                            String narrador = ScannerUtils.capturarTexto("Narrador del documental: ");
+                            plataforma.agreagar(new Documental(
+                                      titulo,
+                                      "",
+                                      duracionMinutos,
+                                      genero,
+                                      8.5,
+                                      LocalDate.now(),
+                                      true,
+                                      narrador
+                            ));
+                       }
+
                    } catch (PeliculaExistenteExcetion e) {
                        System.out.println("Error al agregar la película: " + e.getMessage());
                    }
@@ -113,10 +125,10 @@ public class Main {
                }
                case MOSTRAR_TITULO -> {
                      String nombreBuscado = ScannerUtils.capturarTexto("Ingrese el título de la película a buscar: ");
-                     Pelicula peliculaEncontrada = plataforma.buscarPorTitulo(nombreBuscado);
-                     if(peliculaEncontrada != null) {
+                     Contenido contenidoEncontrada = plataforma.buscarPorTitulo(nombreBuscado);
+                     if(contenidoEncontrada != null) {
                              System.out.println("Película encontrada:");
-                             System.out.println(peliculaEncontrada.obtenerFichaTecnica());
+                             System.out.println(contenidoEncontrada.obtenerFichaTecnica());
                       } else {
                              System.out.println("La película con título '" + nombreBuscado + "' no fue encontrada.");
                      }
@@ -129,9 +141,9 @@ public class Main {
                }
                case ELIMINAR -> {
                     String nombreAEliminar = ScannerUtils.capturarTexto("Ingrese el título de la película a eliminar: ");
-                    Pelicula peliculaAEliminar = plataforma.buscarPorTitulo(nombreAEliminar);
-                    if(peliculaAEliminar != null) {
-                         plataforma.eliminar(peliculaAEliminar);
+                    Contenido contenidoAEliminar = plataforma.buscarPorTitulo(nombreAEliminar);
+                    if(contenidoAEliminar != null) {
+                         plataforma.eliminar(contenidoAEliminar);
                          System.out.println("La película '" + nombreAEliminar + "' ha sido eliminada.");
                     } else {
                          System.out.println("La película con título '" + nombreAEliminar + "' no fue encontrada.");
@@ -139,7 +151,7 @@ public class Main {
                }
                case BUSCAR_POR_GENERO -> {
                    Genero generoBuscado = ScannerUtils.capturarGenero("Ingrese el género a buscar");
-                   List<Pelicula> contenidoPorGenero = plataforma.buscarPorGenero(generoBuscado);
+                   List<Contenido> contenidoPorGenero = plataforma.buscarPorGenero(generoBuscado);
                    System.out.println(contenidoPorGenero.size() + " películas encontradas del género '" + generoBuscado + "':");
                    contenidoPorGenero.forEach(pelicula -> System.out.println("- " + pelicula.getTitulo()));
 
@@ -147,17 +159,17 @@ public class Main {
                 case SALIR -> System.exit(0);
 
                case VER_POPULARES -> {
-                   List<Pelicula> peliculasPopulares = plataforma.getPopulares(2);
+                   List<Contenido> peliculasPopulares = plataforma.getPopulares(2);
                    peliculasPopulares.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica()));
 
                }
 
                case REPRODUCIR -> {
                    String nombre = ScannerUtils.capturarTexto("Ingrese el título de la película a reproducir: ");
-                   Pelicula peliculaAReproducir = plataforma.buscarPorTitulo(nombre);
-                   if(peliculaAReproducir != null) {
-                       plataforma.reproducir(peliculaAReproducir);
-                       System.out.println("Reproduciendo la película '" + peliculaAReproducir.getTitulo() + "'. Disfrútala!");
+                   Contenido contenidoAReproducir = plataforma.buscarPorTitulo(nombre);
+                   if(contenidoAReproducir != null) {
+                       plataforma.reproducir(contenidoAReproducir);
+                       System.out.println("Reproduciendo la película '" + contenidoAReproducir.getTitulo() + "'. Disfrútala!");
                    } else {
                        System.out.println("La película con título '" + nombre + "' no fue encontrada.");
                    }
@@ -169,7 +181,7 @@ public class Main {
 //               String genero = ScannerUtils.capturarTexto("Género de la película: ");
 //               int duracionMinutos = ScannerUtils.capturarEntero("Duración en minutos: ");
 //
-//               Pelicula nuevaPelicula = new Pelicula(
+//               Contenido nuevaPelicula = new Contenido(
 //                       titulo,
 //                       "",
 //                       duracionMinutos,
@@ -181,7 +193,7 @@ public class Main {
 //               plataforma.mostrarTitulos();
 //           } else if(opcionElegida == MOSTRAR_TITULO) {
 //               String nombreBuscado = ScannerUtils.capturarTexto("Ingrese el título de la película a buscar: ");
-//               Pelicula peliculaEncontrada = plataforma.buscarPorTitulo(nombreBuscado);
+//               Contenido peliculaEncontrada = plataforma.buscarPorTitulo(nombreBuscado);
 //               if(peliculaEncontrada != null) {
 //                     System.out.println("Película encontrada:");
 //                     System.out.println(peliculaEncontrada.obtenerFichaTecnica());
@@ -190,7 +202,7 @@ public class Main {
 //               }
 //           } else if(opcionElegida == ELIMINAR) {
 //                String nombreAEliminar = ScannerUtils.capturarTexto("Ingrese el título de la película a eliminar: ");
-//                Pelicula peliculaAEliminar = plataforma.buscarPorTitulo(nombreAEliminar);
+//                Contenido peliculaAEliminar = plataforma.buscarPorTitulo(nombreAEliminar);
 //                if(peliculaAEliminar != null) {
 //                     plataforma.eliminar(peliculaAEliminar);
 //                     System.out.println("La película '" + nombreAEliminar + "' ha sido eliminada.");

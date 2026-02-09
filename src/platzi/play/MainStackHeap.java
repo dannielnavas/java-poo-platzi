@@ -1,13 +1,13 @@
 package platzi.play;
 
+import platzi.play.contenido.Contenido;
 import platzi.play.contenido.Genero;
-import platzi.play.contenido.Pelicula;
 
 import java.time.LocalDate;
 
 public class MainStackHeap {
      public static void main(String[] args) {
-         Pelicula inception = new Pelicula(
+         Contenido inception = new Contenido(
                     "Inception",
                     "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
                     148,
@@ -15,7 +15,7 @@ public class MainStackHeap {
                     LocalDate.now()
          );
 
-         Pelicula interstellar = new Pelicula(
+         Contenido interstellar = new Contenido(
                     "Interstellar",
                     "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
                     169,
