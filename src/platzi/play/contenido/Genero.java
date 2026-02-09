@@ -10,5 +10,9 @@ public enum Genero {
     AVENTURA,
     ANIMACION,
     DOCUMENTAL,
-    ANIMADA
+    ANIMADA,
+    NATURALEZA,
+    ANIMALES,
+    DEPORTES,
+
 }
