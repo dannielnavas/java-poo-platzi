@@ -72,6 +72,7 @@ public class Main {
 
         System.out.println("Bienvenido a " + plataforma.getNombre() + "! Tenemos " + plataforma.getContenio().size() + " películas disponibles, Y mas de " + plataforma.getDuracionTotal() + " minutos de entretenimiento para ti.");
 
+        plataforma.getPromocionables().forEach(promocionables -> System.out.println(promocionables.promocional()));
        while(true) {
            int opcionElegida = ScannerUtils.capturarEntero(
                    "Seleccione una opción:\n" +

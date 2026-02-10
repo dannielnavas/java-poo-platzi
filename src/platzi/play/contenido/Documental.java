@@ -1,7 +1,7 @@
 package platzi.play.contenido;
 
 import java.time.LocalDate;
-    public class Documental extends Contenido{
+    public class Documental extends Contenido implements  Promocionables {
         private String narrador;
 
         public Documental(String titulo, String descripcion, int duracion, Genero genero, LocalDate fechaEstreno) {
@@ -18,7 +18,14 @@ import java.time.LocalDate;
         this.narrador = narrador;
     }
 
+        @Override
+        public String promocional() {
+            return "¡No te pierdas el documental " + this.getTitulo() + " narrado por " + narrador + "! Disponible ahora en nuestra plataforma.";
+        }
+
         public String getNarrador() {
             return narrador;
         }
+
+
     }
