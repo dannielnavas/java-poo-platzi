@@ -8,7 +8,12 @@ import java.time.LocalDate;
         super(titulo, descripcion, duracion, genero, fechaEstreno);
     }
 
-    public Documental(String titulo, String descripcion, int duracion, Genero genero, double calificacion, LocalDate fechaEstreno, boolean disponible, String narrador) {
+        @Override
+        public void reproducir() {
+            System.out.println("Reproduciendo documental: " + getTitulo() + " narrado por " + narrador);
+        }
+
+        public Documental(String titulo, String descripcion, int duracion, Genero genero, double calificacion, LocalDate fechaEstreno, boolean disponible, String narrador) {
         super(titulo, descripcion, duracion, genero, calificacion, fechaEstreno, disponible);
         this.narrador = narrador;
     }

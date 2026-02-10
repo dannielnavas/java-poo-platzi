@@ -2,7 +2,7 @@ package platzi.play.contenido;
 
 import java.time.LocalDate;
 
-public class Contenido {
+public abstract class Contenido {
     private String titulo;
     private String descripcion;
     private int duracion; // Duracion en minutos
@@ -26,9 +26,7 @@ public class Contenido {
         this.disponible = disponible;
     }
 
-    public void reproducir() {
-        System.out.println("Reproduciendo la película: " + titulo);
-    }
+    public abstract void reproducir();
 
     public String obtenerFichaTecnica() {
         return "Título: " + titulo + "\n" +

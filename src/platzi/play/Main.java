@@ -22,6 +22,7 @@ public class Main {
     public static final int REPRODUCIR = 8;
 
 
+
     public static void main(String[] args) {
         System.out.println(NOMBRE_PLATAFORMA + " v" + VERSION);
 
@@ -81,6 +82,7 @@ public class Main {
                            "5. Buscar por genero\n" +
                            "6. Salir\n" +
                            "7. Ver populares\n" +
+                            "9. Buscar por tipo\n" +
                            "Opción: "
            );
            System.out.println("Opcion elegida: " + opcionElegida);
@@ -172,6 +174,21 @@ public class Main {
                        System.out.println("Reproduciendo la película '" + contenidoAReproducir.getTitulo() + "'. Disfrútala!");
                    } else {
                        System.out.println("La película con título '" + nombre + "' no fue encontrada.");
+                   }
+               }
+
+               case 9 -> {
+                   int tipoBuscado = ScannerUtils.capturarEntero("Ingrese el tipo de contenido a buscar (Pelicula/Documental): ");
+                   if(tipoBuscado == 1) {
+                       List<Pelicula> peliculas = plataforma.getPeliculas();
+                       System.out.println("Películas encontradas:");
+                       peliculas.forEach(pelicula -> System.out.println("- " + pelicula.getTitulo()));
+                   } else if(tipoBuscado == 2) {
+                       List<Documental> documentales = plataforma.getDocumentales();
+                       System.out.println("Documentales encontrados:");
+                       documentales.forEach(documental -> System.out.println("- " + documental.getTitulo()));
+                   } else {
+                       System.out.println("Tipo de contenido inválido.");
                    }
                }
            }

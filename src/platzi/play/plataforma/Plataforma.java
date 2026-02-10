@@ -1,8 +1,6 @@
 package platzi.play.plataforma;
 
-import platzi.play.contenido.Contenido;
-import platzi.play.contenido.Genero;
-import platzi.play.contenido.ResumenCotenido;
+import platzi.play.contenido.*;
 import platzi.play.excepcion.PeliculaExistenteExcetion;
 import platzi.play.util.FileUtils;
 
@@ -86,5 +84,13 @@ public class Plataforma {
 
     public List<ResumenCotenido> getResumenes() {
         return contenido.stream().map(contenido -> new ResumenCotenido(contenido.getTitulo(), contenido.getDuracion(), contenido.getGenero())).toList();
+    }
+
+    public List<Pelicula> getPeliculas() {
+        return contenido.stream().filter(contendio -> contendio instanceof Pelicula).map(contenidoFiltrado -> (Pelicula) contenidoFiltrado).toList();
+    }
+
+    public List<Documental> getDocumentales() {
+        return contenido.stream().filter(contendio -> contendio instanceof Documental).map(contenidoFiltrado -> (Documental) contenidoFiltrado).toList();
     }
 }
